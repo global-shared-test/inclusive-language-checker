@@ -1,14 +1,37 @@
-import com.global.hooks.InclusivityCheck
-
 setup
 
-def inclusivityHook = new InclusivityCheck(
-  steps: this
+class InclusivityCheck{
+    def steps
+    Map buildStep
+
+    def postTag(Map data) {
+        String ws = data.ws
+
+        steps.node {
+            steps.ws(ws) {
+                def name = this.buildStep.name
+                def cmd = this.buildStep.command
+
+                steps.stage(name) {
+                    steps.sh cmd
+                    steps.sh "woke"
+                }
+            }
+        }
+    }
+}
+
+def inclusiveHook = new InclusivityCheck (
+    steps: this,
+    buildStep: [
+        name: "Run Inclusive Language Check, please wait...",
+        command: "curl -sSfL https://git.io/getwoke | bash -s -- -b /usr/local/bin"
+    ]
 )
 
 gradleDocker([
     aws: [role: "jenkins-devops", account: "873744935058"],
-    images: ["inclusive-language": "."],
+    images: ["getwoke/woke:0.19.0": "."],
     registry: "873744935058.dkr.ecr.eu-west-1.amazonaws.com",
     team: "jl",
     hooks: [InclusivityCheck],
