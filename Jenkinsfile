@@ -29,12 +29,8 @@ def inclusiveHook = new InclusivityCheck (
     ]
 )
 
-gradleDocker([
+buildGradle([
     aws: [role: "jenkins-devops", account: "873744935058"],
-    images: ["getwoke/woke:0.19.0": "."],
-    registry: "873744935058.dkr.ecr.eu-west-1.amazonaws.com",
-    team: "jl",
-    hooks: [InclusivityCheck],
-    gradleImage: "gradle",
-    gradleTag: "7.3-jdk17"
+    images: ["inclusive-language-test": "."],
+    hooks: [InclusivityCheck]
 ])
