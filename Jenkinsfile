@@ -3,7 +3,7 @@ import com.global.hooks.InclusivityCheck
 setup
 
 def inclusiveHook = new InclusivityCheck (
-    steps: this,
+    steps: this
 )
 
 buildGradle([
