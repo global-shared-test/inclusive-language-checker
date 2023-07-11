@@ -1,5 +1,6 @@
 setup
 
+<<<<<<< HEAD
 class InclusivityCheck{
     def steps
     Map buildStep
@@ -35,6 +36,11 @@ gradleDocker([
     registry: "873744935058.dkr.ecr.eu-west-1.amazonaws.com",
     team: "jl",
     hooks: [InclusivityCheck],
+=======
+buildGradle([
+    aws: [role: "jenkins-devops", account: "873744935058"],
+    images: ["inclusive-language-test": "."],
+>>>>>>> 81ce89e351fbdc08ff69f3cffa1dbb357eaa6b4f
     gradleImage: "gradle",
     gradleTag: "7.3-jdk17"
 ])
