@@ -6,4 +6,12 @@ buildGradle([
     gradleImage: "gradle",
     gradleTag: "7.3-jdk17"
     scan: true
+    build: [
+        [
+          name: "Build and Test",
+          commands: [
+           "gradle build"
+          ]
+        ],
+    ],
 ])
