@@ -5,4 +5,5 @@ buildGradle([
     images: ["inclusive-language-test": "."],
     gradleImage: "gradle",
     gradleTag: "7.3-jdk17"
+    scan: true
 ])
